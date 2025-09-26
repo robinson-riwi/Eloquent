@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DocumentType;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class UsersController extends Controller
     {
         try {
            $users = User::all();
-           return view('users.index',compact('users'));
+           $document_types = DocumentType::all();
+
+           return view('users.index',compact('users','document_types'));
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -33,7 +36,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+           $user = User::create($request->all());
+           return redirect()->route('users.index')->with('success','User created successfully');
+
+        }catch (\Exception $e){
+
+        }
     }
 
     /**
