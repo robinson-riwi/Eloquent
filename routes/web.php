@@ -7,5 +7,14 @@ Route::get('/', function () {
 });
 
 
-Route::resource('users', UsersController::class);
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::redirect('/dashboard', '/users');
+    Route::resource('users', UsersController::class);
+
+});

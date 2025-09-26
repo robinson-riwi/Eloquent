@@ -14,10 +14,10 @@ class UsersController extends Controller
     public function index()
     {
         try {
-           $users = User::all();
-           $document_types = DocumentType::all();
+            $users = User::all();
+            $document_types = DocumentType::all();
 
-           return view('users.index',compact('users','document_types'));
+            return view('users.index', compact('users', 'document_types'));
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -37,10 +37,10 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         try {
-           $user = User::create($request->all());
-           return redirect()->route('users.index')->with('success','User created successfully');
+            $user = User::create($request->all());
+            return redirect()->route('users.index')->with('success', 'User created successfully');
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
 
         }
     }
@@ -50,7 +50,12 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+              $user = User::find($id);
+              return view('users.show', compact('user'));
+        } catch (\Exception $e) {
+
+        }
     }
 
     /**

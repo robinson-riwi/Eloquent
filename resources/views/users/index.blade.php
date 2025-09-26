@@ -6,7 +6,6 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
 </head>
 <body>
 <div class="container">
@@ -20,6 +19,11 @@
                     @if(session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('danger'))
+                        <div class="alert alert-danger">
+                            {{ session('danger') }}
                         </div>
                     @endif
                         <div class="table-responsive">
@@ -43,8 +47,8 @@
                                         <td>{{ $user->lastnames }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->document }}</td>
-                                        <td>{{ $user->documentType->name }}</td>
-                                        <td>{{ $user->documentType->name }}</td>
+                                        <td>{{ @$user->documentType->name }}</td>
+                                        <td></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
